@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Edit Recipe</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" type="text/css" href="edit_recipe.css">
+</head>
+<body>
+    <div class="main">
+        <ul>
+          <li><a href="homepage.html">Home</a></li>
+          <li><a href="all_recipes.php">View Recipes</a></li>
+          <li><a href="#">About</a></li>
+        </ul>
+      </div>
+    
+	<div class="container">
+	<form method="post" action="update_recipe.php">
+		<input type="hidden" name="recipe_id" value="<?php echo $recipeId; ?>">
+		<label for="recipe_name">Recipe Name:</label>
+		<input type="text" name="recipe_name" id="recipe_name" value="<?php echo $row['recipe_name']; ?>" required><br><br>
+
+		<label for="description">Description:</label><br>
+		<textarea name="description" id="description" rows="5" cols="50" required><?php echo $row['description']; ?></textarea><br><br>
+
+		<label for="instructions">Instructions:</label><br>
+		<textarea name="instructions" id="instructions" rows="10" cols="50" required><?php echo $row['instructions']; ?></textarea><br><br>
+
+		<label for="recipe_image">Recipe Image:</label>
+		<input type="text" name="recipe_image" id="recipe_image" value="<?php echo $row['recipe_image']; ?>"><br><br>
+
+		<label for="servings">Servings:</label>
+		<input type="number" name="servings" id="servings" min="1" value="<?php echo $row['servings']; ?>" required><br><br>
+
+		<label for="calories">Calories:</label>
+		<input type="number" name="calories" id="calories" min="0" value="<?php echo $row['calories']; ?>" required><br><br>
+
+		<label for="fat">Fat:</label>
+		<input type="number" name="fat" id="fat" min="0" value="<?php echo $row['fat']; ?>" required><br><br>
+
+		<label for="carbs">Carbs:</label>
+		<input type="number" name="carbs" id="carbs" min="0" value="<?php echo $row['carbs']; ?>" required><br><br>
+
+		<label for="protein">Protein:</label>
+		<input type="number" name="protein" id="protein" min="0" value="<?php echo $row['protein']; ?>" required><br><br>
+
+		<div id="ingredients">
+			<?php foreach ($ingredients as $ingredient): ?>
+				<div class="ingredient">
+				<input type="text" name="ingredient_name[]" placeholder="Ingredient Name" value="<?php echo $ingredient['ingredient_name']; ?>" required>
+					<input type="text" name="ingredient_quantity[]" placeholder="Quantity" value="<?php echo $ingredient['quantity']; ?>" required>
+					<select name="ingredient_unit[]">
+<option value="pint(s)" <?php if($ingredient['unit'] == 'pint(s)') echo 'selected'; ?>>pint(s)</option>
+<option value="quart(s)" <?php if($ingredient['unit'] == 'quart(s)') echo 'selected'; ?>>quart(s)</option>
+<option value="gallon(s)" <?php if($ingredient['unit'] == 'gallon(s)') echo 'selected'; ?>>gallon(s)</option>
+<option value="gram(s)" <?php if($ingredient['unit'] == 'gram(s)') echo 'selected'; ?>>gram(s)</option>
+<option value="pound(s)" <?php if($ingredient['unit'] == 'pound(s)') echo 'selected'; ?>>pound(s)</option>
+<option value="milliliter(s)" <?php if($ingredient['unit'] == 'milliliter(s)') echo 'selected'; ?>>milliliter(s)</option>
+<option value="liter(s)" <?php if($ingredient['unit'] == 'liter(s)') echo 'selected'; ?>>liter(s)</option>
+<option value="teaspoon(s)" <?php if($ingredient['unit'] == 'teaspoon(s)') echo 'selected'; ?>>teaspoon(s)</option>
+<option value="tablespoon(s)" <?php if($ingredient['unit'] == 'tablespoon(s)') echo 'selected'; ?>>tablespoon(s)</option>
+<option value="cup(s)" <?php if($ingredient['unit'] == 'cup(s)') echo 'selected'; ?>>cup(s)</option>
+<option value="ounce(s)" <?php if($ingredient['unit'] == 'ounce(s)') echo 'selected'; ?>>ounce(s)</option>
+<option value="clove(s)" <?php if($ingredient['unit'] == 'clove(s)') echo 'selected'; ?>>clove(s)</option>
+<option value="whole" <?php if($ingredient['unit'] == 'whole') echo 'selected'; ?>>whole</option>
+<option value="to taste" <?php if($ingredient['unit'] == 'to taste') echo 'selected'; ?>>to taste</option>
+</select>
+<button type="button" class="remove-ingredient">Remove</button>
+</div>
+<?php endforeach; ?>
+</div>
+<button type="button" id="add-ingredient">Add Ingredient</button><br><br>
+	<input type="submit" value="Update Recipe">
+</form>
+</div>
+
+<footer>
+    <p>&copy; 2023 Mock Recipe Website</p>
+  </footer>
+
+<script>
+	document.getElementById("add-ingredient").addEventListener("click", function () {
+		var ingredients = document.getElementById("ingredients");
+		var ingredient = document.createElement("div");
+		ingredient.classList.add("ingredient");
+		ingredient.innerHTML = `
+			<input type="text" name="ingredient_name[]" placeholder="Ingredient Name" required>
+			<input type="text" name="ingredient_quantity[]" placeholder="Quantity" required>
+			<select name="ingredient_unit[]">
+			  <option value="pint(s)">pint(s)</option>
+              <option value="quart(s)">quart(s)</option>
+              <option value="gallon(s)">gallon(s)</option>
+              <option value="gram(s)">gram(s)</option>
+              <option value="pound(s)">pound(s)</option>
+              <option value="milliliter(s)">milliliter(s)</option>
+              <option value="liter(s)">liter(s)</option>
+              <option value="teaspoon(s)">teaspoon(s)</option>
+              <option value="tablespoon(s)">tablespoon(s)</option>
+              <option value="cup(s)">cup(s)</option>
+              <option value="ounce(s)">ounce(s)</option>
+              <option value="clove(s)">clove(s)</option>
+              <option value="whole">whole</option>
+              <option value="to taste">to taste</option>
+			</select>
+			<button type="button" class="remove-ingredient">Remove</button>
+		`;
+		ingredients.appendChild(ingredient);
+	});
+
+	document.addEventListener("click", function (event) {
+		if (event.target.classList.contains("remove-ingredient")) {
+			event.target.parentNode.remove();
+		}
+	});
+</script>
+
+
+</body>
+</html>

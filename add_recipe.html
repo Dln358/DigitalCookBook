@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Recipe</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit= no" />
+    <link rel="stylesheet" type="text/css" href="add_recipe.css">
+</head>
+
+<body>
+    <div class="main">
+        <ul>
+          <li><a href="homepage.html">Home</a></li>
+          <li><a href="all_recipes.php">View Recipes</a></li>
+          <li><a href="index.html">Portfolio</a></li>
+        </ul>
+      </div>
+
+    
+      <div class="container">
+
+    <form method="post" action="add_recipe.php">
+        <label for="recipe_name">Recipe Name:</label>
+        <input type="text" name="recipe_name" required>
+      
+        <label for="description">Description:</label>
+        <textarea name="description" rows="3"></textarea>
+      
+        <label for="instructions">Instructions:</label>
+        <textarea name="instructions" rows="6" required></textarea>
+      
+        <label for="recipe_image">Image URL:</label>
+        <input type="text" name="recipe_image">
+      
+        <label for="servings">Servings:</label>
+        <input type="number" name="servings">
+      
+        <label for="calories">Calories:</label>
+        <input type="number" name="calories">
+      
+        <label for="fat">Fat:</label>
+        <input type="number" name="fat">
+      
+        <label for="carbs">Carbs:</label>
+        <input type="number" name="carbs">
+      
+        <label for="protein">Protein:</label>
+        <input type="number" name="protein">
+      
+        <h2>Ingredients</h2>
+      
+        <div id="ingredients">
+          <div class="ingredient">
+            <input type="text" name="ingredient_name[]" placeholder="Ingredient Name" required>
+            <input type="text" name="ingredient_quantity[]" placeholder="Quantity" required>
+            <select name="ingredient_unit[]">
+              <option value="pint(s)">pint(s)</option>
+              <option value="quart(s)">quart(s)</option>
+              <option value="gallon(s)">gallon(s)</option>
+              <option value="gram(s)">gram(s)</option>
+              <option value="pound(s)">pound(s)</option>
+              <option value="milliliter(s)">milliliter(s)</option>
+              <option value="liter(s)">liter(s)</option>
+              <option value="teaspoon(s)">teaspoon(s)</option>
+              <option value="tablespoon(s)">tablespoon(s)</option>
+              <option value="cup(s)">cup(s)</option>
+              <option value="ounce(s)">ounce(s)</option>
+              <option value="clove(s)">clove(s)</option>
+              <option value="whole">whole</option>
+              <option value="to taste">to taste</option>
+            </select>
+            <button type="button" class="remove-ingredient">Remove</button>
+          </div>
+        </div>
+      
+        <button type="button" id="add-ingredient">Add Ingredient</button>
+      
+        <input type="submit" value="Add Recipe">
+    </form>
+</div>
+
+
+   <script>
+    const addIngredientButton = document.getElementById('add-ingredient');
+    const ingredientsDiv = document.getElementById('ingredients');
+
+    addIngredientButton.addEventListener('click', function() {
+    const ingredientDiv = document.createElement('div');
+    ingredientDiv.className = 'ingredient';
+
+    const ingredientNameInput = document.createElement('input');
+    ingredientNameInput.type = 'text';
+    ingredientNameInput.name = 'ingredient_name[]';
+    ingredientNameInput.required = true;
+
+    const ingredientQuantityInput = document.createElement('input');
+    ingredientQuantityInput.type = 'text';
+    ingredientQuantityInput.name = 'ingredient_quantity[]';
+    ingredientQuantityInput.placeholder = 'Quantity';
+    ingredientQuantityInput.required = true;
+
+    const ingredientUnitSelect = document.createElement('select');
+    ingredientUnitSelect.name = 'ingredient_unit[]';
+
+    const units = ['pint(s)', 'quart(s)', 'gallon(s)', 'gram(s)', 'pound(s)', 'milliliter(s)', 'liter(s)', 'teaspoon(s)', 'tablespoon(s)', 'cup(s)', 'ounce(s)', 'clove(s)', 'whole', 'to taste'];
+
+    for (const unit of units) {
+        const option = document.createElement('option');
+        option.value = unit;
+        option.text = unit;
+        ingredientUnitSelect.appendChild(option);
+    }
+
+    const removeButton = document.createElement('button');
+    removeButton.type = 'button';
+    removeButton.textContent = 'Remove';
+    removeButton.addEventListener('click', function() {
+        ingredientDiv.remove();
+    });
+
+    ingredientDiv.appendChild(ingredientNameInput);
+    ingredientDiv.appendChild(ingredientQuantityInput);
+    ingredientDiv.appendChild(ingredientUnitSelect);
+    ingredientDiv.appendChild(removeButton);
+
+    ingredientsDiv.appendChild(ingredientDiv);
+});
+
+
+</script>
+</body>
+</html>

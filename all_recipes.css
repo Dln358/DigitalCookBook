@@ -1,0 +1,273 @@
+ *{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+ }
+ .logo img{
+    float: left;
+    width: 150px;
+    height: auto;
+  }
+
+  /* nav buttons */
+ul{
+    float: right;
+    list-style: none;
+    margin-top: 30px;
+    min-height: 400px;
+    margin-right: 60px;
+    font-size: 25px;
+  }
+  
+  ul li{
+    display: inline-block;
+  }
+  
+  ul li a{
+    text-decoration: solid;
+    border-radius: 5px 20px 5px;
+    background-color: #4CAF50;
+    color: #fff;
+    padding: 10px 40px;
+    transition: 0.5 ease
+  }
+  
+  ul li a:hover{
+    color:#45a049;
+    border-radius: 5px 20px 5px;
+    background-color: #ffffff;
+  }
+
+  /* Body style */
+  body{
+    background-image: url('bannerImage.jpg');
+    background-repeat: cover;
+    background-size: cover;
+    background-attachment: fixed;
+    overflow-y: scroll;
+  }
+
+  /* h1 style */
+  h1{
+    position: absolute;
+    top: 6%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 40px;
+    color: rgb(249, 252, 252);
+    border-radius: 10px / 30px;
+    background-color: #4CAF50;
+
+  }
+
+/* Media query for smaller screens */
+@media screen and (max-width: 768px) {
+  h1 {
+    font-size: 14px; /* Adjust font size for smaller screens */
+  }
+}
+
+  
+  /* main */
+  main{
+    display: flex;
+		flex-wrap: wrap;
+    position: absolute;
+    top: 15%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  /* Default styles for larger screens */
+main {
+  width: 100%; /* Full width on larger screens */
+  font-size: 16px; /* Base font size for larger screens */
+}
+
+/* Media query for smaller screens */
+@media screen and (max-width: 768px) {
+  main {
+    font-size: 14px; /* Adjust font size for smaller screens */
+  }
+}
+  
+  /* search form position */
+  .search-form-container {
+    position: absolute;
+    top: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  
+
+  /* Style for the text box */
+input[type="text"] {
+    padding: 10px;
+    font-size: 18px;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+    width: 300px;
+    margin-right: 10px;
+  }
+  
+  /* Style for the button */
+  button[type="submit"] {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+  }
+  
+  /* Style for the button on hover */
+  button[type="submit"]:hover {
+    background-color: white;
+    color: #4CAF50;
+  }
+  
+  
+  /* Container */
+  .container {
+    overflow-y: auto;
+    position: absolute;
+    top: 15%;
+    left: 10%;
+    width: 80%;
+    height: 82%;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid black;
+    background-color: #f2f2f2;
+  }
+
+  /* page number box */
+  .pages {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-wrap: nowrap;
+  }
+  
+  .page {
+    flex: 0 0 100%;
+    height: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+  }
+  
+  .controls {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+  }
+  
+  .prev, .next {
+    width: 50px;
+    height: 50px;
+    border: none;
+    background-color: transparent;
+    font-size: 30px;
+    color: #000;
+    cursor: pointer;
+    outline: none;
+  }
+  
+  .page-number {
+    margin: 0 20px;
+    font-size: 24px;
+    font-weight: bold;
+  }
+  
+  /* Recipe cards */
+  .recipe-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+  
+  .recipe-card {
+    background-color: #fff;
+    border-radius: 20px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .recipe-card:hover {
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
+  }
+  
+  .recipe-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    object-position: center;
+  }
+  
+  .recipe-card h3 {
+    margin: 20px;
+    font-size: 24px;
+  }
+  
+  .recipe-card p {
+    margin: 20px;
+    font-size: 16px;
+    line-height: 1.5;
+  }
+  
+  .recipe-card a {
+    display: inline-block;
+    margin: 20px;
+    padding: 10px 20px;
+    background-color:  #45a049;
+    color: #fff;
+    text-align: center;
+    border-radius: 5px;
+    text-decoration: none;
+  }
+  
+  .recipe-card a:hover {
+    background-color: #666;
+    color: #fff;
+  }
+  
+  /* Add button */
+  .add-btn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+  }
+
+  .add-btn:hover{
+    background-color: white;
+    color: #4CAF50;
+
+  }
+
+  /* Footer styles */
+footer {
+    position: absolute;
+    bottom: 0%;
+    left: 10px;
+    width: 100%;
+    color: #ffffff;
+    padding: 20px;
+    text-align: center;
+    clear: both;
+    }
+  footer p {
+    margin: 0;
+    } 

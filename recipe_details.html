@@ -1,0 +1,71 @@
+<?php
+// Connect to the database
+require_once('db_connection.php');
+
+// Get the details of the selected recipe
+$recipe_id = $_GET['recipe_id'];
+$sql = "SELECT * FROM recipes WHERE recipe_id = $recipe_id";
+$result = mysqli_query($conn, $sql);
+
+if (mysqli_num_rows($result) == 1) {
+  $row = mysqli_fetch_assoc($result);
+?>
+<!DOCTYPE html>
+<html>
+<head>
+  <title><?php echo $row['recipe_name']; ?></title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="recipe_details.css">
+</head>
+<body>
+  
+  <div class="main">
+    <ul>
+      <li><a href="homepage.html">Home</a></li>
+      <li><a href="all_recipes.php">View Recipes</a></li>
+      <li><a href="#">About</a></li>
+    </ul>
+  </div>
+  
+  <div class="container">
+    <h1><?php echo $row['recipe_name']; ?></h1>
+  
+    <h2>Ingredients:</h2>
+    <ul class="ingredients-list">
+      <?php
+      // Get the ingredients for the recipe
+      $sql = "SELECT i.ingredient_name, ri.quantity, ri.unit
+              FROM ingredients i
+              INNER JOIN recipe_ingredients ri ON i.ingredient_id = ri.ingredient_id
+              WHERE ri.recipe_id = $recipe_id";
+      $result = mysqli_query($conn, $sql);
+  
+      while ($row2 = mysqli_fetch_assoc($result)) {
+        echo '<li>' . $row2['ingredient_name'] . ' - ' . $row2['quantity'] . ' ' . $row2['unit'] . '</li>';
+      }
+      ?>
+    </ul>
+  
+    <h2>Directions:</h2>
+    <p class="instructions"><?php echo $row['instructions']; ?></p>
+  
+    <h2>Nutrition Facts:</h2>
+    <ul class="nutrition-facts">
+      <li>Serving Size: <?php echo $row['servings']; ?></li>
+      <li>Calories: <?php echo $row['calories']; ?></li>
+      <li>Protein: <?php echo $row['protein']; ?></li>
+      <li>Fat: <?php echo $row['fat']; ?></li>
+      <li>Carbs: <?php echo $row['carbs']; ?></li>
+    </ul>
+  </div>
+    
+</body>
+
+</html>
+<?php
+} else {
+  echo "Recipe not found.";
+}
+// Close the database connection
+mysqli_close($conn);
+?>
